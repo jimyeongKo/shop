@@ -17,11 +17,9 @@ public class UserRequest {
 
     private String userName;
 
-    private Long team;
-
     private String userInfo;
 
-    private int birth;
+    private String birth;
 
     private String phoneNum;
 }

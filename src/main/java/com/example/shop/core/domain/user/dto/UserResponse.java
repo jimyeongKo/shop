@@ -16,7 +16,7 @@ public class UserResponse {
 
     private String userName;
 
-    private int birth;
+    private String birth;
 
     private String phoneNum;
 
