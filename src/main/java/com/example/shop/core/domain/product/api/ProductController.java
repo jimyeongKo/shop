@@ -8,6 +8,9 @@ import com.example.shop.core.global.response.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 
 @RestController
@@ -18,8 +21,8 @@ public class ProductController {
     private final ProductService service;
 
     @PostMapping("/reg")
-    public ApiResponse<String> createProduct(@RequestBody ProductRequest request) {
-        return new ApiResponse(HttpStatus.CREATED, service.create(request));
+    public ApiResponse<String> createProduct(@RequestBody ProductRequest request, List<MultipartFile> images) {
+        return new ApiResponse(HttpStatus.CREATED, service.create(request, images));
     }
 
     @GetMapping()

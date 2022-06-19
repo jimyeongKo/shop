@@ -1,5 +1,6 @@
 package com.example.shop.core.domain.product.domain;
 
+import com.example.shop.core.domain.image.domain.Image;
 import com.example.shop.core.domain.product.dto.ProductRequest;
 import com.example.shop.core.domain.user.domain.User;
 import lombok.AllArgsConstructor;
@@ -7,12 +8,11 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 @Entity
 @Getter
@@ -44,6 +44,18 @@ public class Product {
 
     //구매개수
     private Integer purchaseCount;
+
+    @OneToMany(mappedBy = "product",orphanRemoval = true,cascade = CascadeType.ALL)
+    private final List<Image> images = new ArrayList<>();
+
+    public void addImage(Image image) {
+        this.images.add(image);
+        image.setProduct(this);
+    }
+
+    public void deleteImage(List<Image> image) {
+        this.images.remove(image);
+    }
 
     public static Product createProduct(ProductRequest request) {
         return Product.builder()
